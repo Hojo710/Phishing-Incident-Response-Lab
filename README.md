@@ -10,13 +10,13 @@ All domains, IP addresses, accounts, files, and incident artifacts used througho
 
 ## Investigation Cases
 
-### Case 01 — Credential Phishing Investigation
+### [Case 01 — Credential Phishing Investigation](cases/case-01-credential-phishing/)
 Investigated a simulated Microsoft 365 credential-phishing email by analyzing sender information, Reply-To discrepancies, SPF/DKIM/DMARC results, phishing indicators, URLs, and other IOCs. The case focused on distinguishing email authentication from actual sender legitimacy and documenting an evidence-based final disposition.
 
-### Case 02 — Malicious Attachment Investigation
+### [Case 02 — Malicious Attachment Investigation](cases/case-02-malicious-attachment/)
 Investigated a simulated phishing email containing a suspicious double-extension attachment. Performed safe file-hash comparison, file-signature analysis, readable-content analysis, and simulated sandbox analysis without executing real malware. The investigation mapped observed behaviors to MITRE ATT&CK and developed containment and remediation recommendations.
 
-### Case 03 — Full Phishing Incident Investigation
+### [Case 03 — Full Phishing Incident Investigation](cases/case-03-full-incident-investigation/)
 Conducted an end-to-end investigation of a simulated credential-phishing incident that progressed to Microsoft 365 account compromise. Correlated reported credential submission with authentication activity, identified a Conditional Access configuration gap, investigated post-compromise mailbox and OneDrive activity, and confirmed the unauthorized download of three Confidential or Restricted financial files.
 
 The incident was classified as **High severity** based on confirmed account compromise and data exfiltration.
@@ -57,7 +57,11 @@ Phishing-Incident-Response-Lab/
     ├── case-02-incident-report.txt
     └── case-03-incident-report.txt
 ```
+### Investigation Artifacts
 
+**Indicators of Compromise:** [Case 01](iocs/case-01-iocs.txt) | [Case 02](iocs/case-02-iocs.txt) | [Case 03](iocs/case-03-iocs.txt)
+
+**Incident Reports:** [Case 01](reports/case-01-incident-report.txt) | [Case 02](reports/case-02-incident-report.txt) | [Case 03](reports/case-03-incident-report.txt)
 ## Key Lessons
 
 - Successful SPF, DKIM, and DMARC authentication does not prove that an email is legitimate. An attacker-controlled lookalike domain can have correctly configured authentication records.
