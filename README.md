@@ -14,7 +14,7 @@ All domains, IP addresses, accounts, files, and incident artifacts used througho
 Investigated a simulated Microsoft 365 credential-phishing email by analyzing sender information, Reply-To discrepancies, SPF/DKIM/DMARC results, phishing indicators, URLs, and other IOCs. The case focused on distinguishing email authentication from actual sender legitimacy and documenting an evidence-based final disposition.
 
 ### [Case 02 — Malicious Attachment Investigation](cases/case-02-malicious-attachment/)
-Investigated a simulated phishing email containing a suspicious double-extension attachment. Performed safe file-hash comparison, file-signature analysis, readable-content analysis, and simulated sandbox analysis without executing real malware. The investigation mapped observed behaviors to MITRE ATT&CK and developed containment and remediation recommendations.
+Investigated a simulated phishing email containing a suspicious double-extension attachment. Performed safe file-hash comparison, file-signature analysis, readable-content analysis, and simulated sandbox behavior analysis without executing real malware. The investigation mapped observed behaviors to MITRE ATT&CK and developed containment and remediation recommendations.
 
 ### [Case 03 — Full Phishing Incident Investigation](cases/case-03-full-incident-investigation/)
 Conducted an end-to-end investigation of a simulated credential-phishing incident that progressed to Microsoft 365 account compromise. Correlated reported credential submission with authentication activity, identified a Conditional Access configuration gap, investigated post-compromise mailbox and OneDrive activity, and confirmed the unauthorized download of three Confidential or Restricted financial files.
@@ -29,7 +29,7 @@ The incident was classified as **High severity** based on confirmed account comp
 - IOC identification and enrichment
 - URL and domain analysis
 - Safe file hash and file-signature analysis
-- Static and simulated dynamic malware analysis
+- Static malware analysis and simulated sandbox behavior analysis
 - Microsoft 365 authentication investigation
 - MFA and Conditional Access analysis
 - Cloud account compromise investigation
