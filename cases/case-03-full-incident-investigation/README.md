@@ -1,8 +1,8 @@
-\# Case 03 — Full Phishing Incident Investigation
+# Case 03 — Full Phishing Incident Investigation
 
 
 
-\## Overview
+## Overview
 
 
 
@@ -18,31 +18,31 @@ All domains, IP addresses, accounts, and incident artifacts used in this case ar
 
 
 
-\## Investigation Objectives
+## Investigation Objectives
 
 
 
-\- Analyze a suspicious Microsoft 365 phishing email and identify phishing indicators.
+- Analyze a suspicious Microsoft 365 phishing email and identify phishing indicators.
 
-\- Evaluate SPF, DKIM, and DMARC results without treating successful authentication as proof of legitimacy.
+- Evaluate SPF, DKIM, and DMARC results without treating successful authentication as proof of legitimacy.
 
-\- Investigate reported credential submission and correlate it with Microsoft 365 authentication activity.
+- Investigate reported credential submission and correlate it with Microsoft 365 authentication activity.
 
-\- Distinguish an MFA/Conditional Access configuration gap from an MFA bypass.
+- Distinguish an MFA/Conditional Access configuration gap from an MFA bypass.
 
-\- Investigate post-compromise mailbox and OneDrive activity.
+- Investigate post-compromise mailbox and OneDrive activity.
 
-\- Determine whether sensitive organizational data was accessed or exfiltrated.
+- Determine whether sensitive organizational data was accessed or exfiltrated.
 
-\- Map observed attacker behavior to MITRE ATT\&CK techniques.
+- Map observed attacker behavior to MITRE ATT\&CK techniques.
 
-\- Develop appropriate containment, escalation, and remediation recommendations.
+- Develop appropriate containment, escalation, and remediation recommendations.
 
-\- Document the incident using evidence-based SOC reporting practices.
+- Document the incident using evidence-based SOC reporting practices.
 
 
 
-\## Incident Summary
+## Incident Summary
 
 
 
@@ -58,37 +58,27 @@ Investigation of the unauthorized session identified mailbox access, creation of
 
 
 
-The incident was classified as \*\*High severity\*\* due to confirmed cloud account compromise and data exfiltration.
+The incident was classified as **High severity** due to confirmed cloud account compromise and data exfiltration.
 
 
 
-\## Investigation Timeline
+## Investigation Timeline
 
 
 
 | Time | Event | Finding |
-
-|---|---|---|
-
+| --- | --- | --- |
 | 08:02 | Legitimate authentication | Successful Microsoft 365 authentication from New York using the employee's known company device. MFA satisfied. |
-
 | 08:14 | Phishing email received | Simulated Microsoft 365 credential-phishing email delivered to the employee. |
-
 | After 08:14 | User interaction | Employee reported clicking the phishing link and submitting work credentials. |
-
 | 08:37 | Unauthorized authentication | Successful authentication from `198.51.100.219` using a new/unknown device. |
-
 | 08:41 | Inbox rule created | Unauthorized session created a rule targeting security-related notifications. |
-
 | 08:44 | Mailbox search | Unauthorized session searched the mailbox for `"invoice"`. |
-
 | 08:46+ | OneDrive activity | Unauthorized session accessed OneDrive and financial data. |
-
 | Subsequent activity | Data exfiltration | Three Confidential or Restricted financial files were successfully downloaded. |
 
 
-
-\## Phishing Email Analysis
+## Phishing Email Analysis
 
 
 
@@ -96,27 +86,27 @@ Initial analysis identified several indicators consistent with credential phishi
 
 
 
-\- The sender used a Microsoft 365 lookalike domain.
+- The sender used a Microsoft 365 lookalike domain.
 
-\- The Reply-To address used a different domain from the sender.
+- The Reply-To address used a different domain from the sender.
 
-\- The message used urgency and threatened account restrictions to encourage immediate action.
+- The message used urgency and threatened account restrictions to encourage immediate action.
 
-\- The embedded link directed the employee to a separate credential-verification domain.
+- The embedded link directed the employee to a separate credential-verification domain.
 
-\- SPF, DKIM, and DMARC all passed; however, these results only established authentication and alignment for the sending domain and did not establish that the domain belonged to Microsoft.
-
-
-
-!\[Simulated Microsoft 365 phishing email](screenshots/01-phishing-email.png)
+- SPF, DKIM, and DMARC all passed; however, these results only established authentication and alignment for the sending domain and did not establish that the domain belonged to Microsoft.
 
 
 
-\*\*Analyst Finding:\*\* Successful SPF, DKIM, and DMARC authentication should not be treated as proof that an email is legitimate. An attacker-controlled lookalike domain can be configured with valid email-authentication records.
+![Simulated Microsoft 365 phishing email](screenshots/01-phishing-email.png)
 
 
 
-\## Account Compromise Investigation
+**Analyst Finding:** Successful SPF, DKIM, and DMARC authentication should not be treated as proof that an email is legitimate. An attacker-controlled lookalike domain can be configured with valid email-authentication records.
+
+
+
+## Account Compromise Investigation
 
 
 
@@ -132,15 +122,15 @@ At 08:37, a second successful Microsoft 365 authentication was observed with the
 
 
 
-\- Source IP: `198.51.100.219`
+- Source IP: `198.51.100.219`
 
-\- Location: Amsterdam, Netherlands
+- Location: Amsterdam, Netherlands
 
-\- Device: New / Unknown
+- Device: New / Unknown
 
-\- Authentication Result: Success
+- Authentication Result: Success
 
-\- MFA Result: Not Satisfied
+- MFA Result: Not Satisfied
 
 
 
@@ -148,19 +138,19 @@ When correlated with the employee's reported credential submission and the subse
 
 
 
-!\[Legitimate and unauthorized Microsoft 365 sign-in activity](screenshots/02-signin-activity.png)
+![Legitimate and unauthorized Microsoft 365 sign-in activity](screenshots/02-signin-activity.png)
 
 
 
-\*\*Analyst Finding:\*\* Geographic differences alone should not be treated as proof of account compromise because VPNs, proxies, and IP geolocation can affect apparent location. The conclusion was based on the combined evidence of reported credential submission, successful authentication from a new/unknown device, and subsequent unauthorized account activity.
+**Analyst Finding:** Geographic differences alone should not be treated as proof of account compromise because VPNs, proxies, and IP geolocation can affect apparent location. The conclusion was based on the combined evidence of reported credential submission, successful authentication from a new/unknown device, and subsequent unauthorized account activity.
 
 
 
-\## MFA / Conditional Access Investigation
+## MFA / Conditional Access Investigation
 
 
 
-The unauthorized authentication initially showed an MFA result of \*\*Not Satisfied\*\*. Additional authentication-control evidence was reviewed to determine whether the attacker had bypassed MFA.
+The unauthorized authentication initially showed an MFA result of **Not Satisfied**. Additional authentication-control evidence was reviewed to determine whether the attacker had bypassed MFA.
 
 
 
@@ -168,13 +158,13 @@ The review identified:
 
 
 
-\- Registered MFA Method: Microsoft Authenticator
+- Registered MFA Method: Microsoft Authenticator
 
-\- MFA Result: Not Satisfied
+- MFA Result: Not Satisfied
 
-\- MFA Challenge Issued: No
+- MFA Challenge Issued: No
 
-\- Conditional Access Policy Applied: No
+- Conditional Access Policy Applied: No
 
 
 
@@ -182,15 +172,15 @@ The employee account had been unintentionally excluded from the organization's C
 
 
 
-!\[MFA and Conditional Access policy review](screenshots/03-mfa-conditional-access-review.png)
+![MFA and Conditional Access policy review](screenshots/03-mfa-conditional-access-review.png)
 
 
 
-\*\*Analyst Finding:\*\* The available evidence supports a Conditional Access configuration gap rather than an MFA bypass. An MFA bypass would imply that an MFA control was applied and subsequently defeated, circumvented, or otherwise overcome. In this incident, the expected MFA control was never applied.
+**Analyst Finding:** The available evidence supports a Conditional Access configuration gap rather than an MFA bypass. An MFA bypass would imply that an MFA control was applied and subsequently defeated, circumvented, or otherwise overcome. In this incident, the expected MFA control was never applied.
 
 
 
-\## Post-Compromise Activity
+## Post-Compromise Activity
 
 
 
@@ -202,37 +192,37 @@ Observed activity included:
 
 
 
-\- Successful mailbox access
+- Successful mailbox access
 
-\- Creation of an unauthorized inbox rule
+- Creation of an unauthorized inbox rule
 
-\- Mailbox search for `"invoice"`
+- Mailbox search for `"invoice"`
 
-\- OneDrive file access
-
-
-
-The unauthorized inbox rule, named \*\*Security Notifications\*\*, was configured to identify messages containing terms such as `"security alert"`, `"unusual sign-in"`, and `"password changed"`. Matching messages were marked as read and moved to Deleted Items.
+- OneDrive file access
 
 
 
-The rule contained \*\*no forwarding address\*\*, so the evidence did not establish external email forwarding. Its configuration was consistent with an attempt to reduce the likelihood that the account owner would notice security-related notifications.
+The unauthorized inbox rule, named **Security Notifications**, was configured to identify messages containing terms such as `"security alert"`, `"unusual sign-in"`, and `"password changed"`. Matching messages were marked as read and moved to Deleted Items.
 
 
 
-!\[Post-compromise mailbox activity](screenshots/04-post-compromise-activity.png)
+The rule contained **no forwarding address**, so the evidence did not establish external email forwarding. Its configuration was consistent with an attempt to reduce the likelihood that the account owner would notice security-related notifications.
 
 
 
-!\[Additional post-compromise activity](screenshots/05-post-compromise-activity.png)
+![Post-compromise mailbox activity](screenshots/04-post-compromise-activity.png)
 
 
 
-\*\*Analyst Finding:\*\* The activity demonstrates that the incident progressed beyond credential exposure and unauthorized authentication. The compromised account was actively used to access the employee's mailbox, modify mailbox behavior, search for financial-related information, and access OneDrive.
+![Additional post-compromise activity](screenshots/05-post-compromise-activity.png)
 
 
 
-\## Data Exfiltration Investigation
+**Analyst Finding:** The activity demonstrates that the incident progressed beyond credential exposure and unauthorized authentication. The compromised account was actively used to access the employee's mailbox, modify mailbox behavior, search for financial-related information, and access OneDrive.
+
+
+
+## Data Exfiltration Investigation
 
 
 
@@ -245,18 +235,14 @@ Three successful `FileDownloaded` events were identified from source IP `198.51.
 
 
 | File | Classification | Bytes Transferred |
-
-|---|---|---:|
-
+| --- | --- | ---: |
 | Q3-Financial-Forecast.xlsx | Confidential | 2,846,720 |
-
 | Vendor-Payment-Details.xlsx | Restricted | 684,032 |
-
 | Department-Budget-2027.xlsx | Confidential | 1,427,456 |
 
 
 
-!\[Confirmed file download activity](screenshots/06-data-exfiltration.png)
+![Confirmed file download activity](screenshots/06-data-exfiltration.png)
 
 
 
@@ -264,19 +250,19 @@ Content review determined that the files contained:
 
 
 
-\- Internal revenue projections and quarterly forecasts
+- Internal revenue projections and quarterly forecasts
 
-\- Vendor names, payment amounts, invoice numbers, and bank-routing information
+- Vendor names, payment amounts, invoice numbers, and bank-routing information
 
-\- Department budget projections
-
-
-
-!\[Data classification and impact](screenshots/07-data-classification-impact.png)
+- Department budget projections
 
 
 
-Because the audit records showed successful file-download operations during the unauthorized session, the evidence supports \*\*confirmed data exfiltration\*\* of these three files.
+![Data classification and impact](screenshots/07-data-classification-impact.png)
+
+
+
+Because the audit records showed successful file-download operations during the unauthorized session, the evidence supports **confirmed data exfiltration** of these three files.
 
 
 
@@ -284,41 +270,34 @@ The available evidence does not establish exfiltration of additional files beyon
 
 
 
-\*\*Analyst Finding:\*\* File access alone would not have been sufficient to establish data exfiltration. The successful `FileDownloaded` events provided the additional evidence necessary to determine that the three identified files were transferred during the unauthorized session.
+**Analyst Finding:** File access alone would not have been sufficient to establish data exfiltration. The successful `FileDownloaded` events provided the additional evidence necessary to determine that the three identified files were transferred during the unauthorized session.
 
 
 
-\## MITRE ATT\&CK Mapping
+## MITRE ATT&CK Mapping
 
 
 
-The observed activity was mapped to the following MITRE ATT\&CK techniques:
+The observed activity was mapped to the following MITRE ATT&CK techniques:
 
 
 
 | Technique | Name | Evidence |
-
-|---|---|---|
-
+| --- | --- | --- |
 | T1566.002 | Phishing: Spearphishing Link | The phishing email delivered a link to the simulated credential-harvesting website. |
-
 | T1204.001 | User Execution: Malicious Link | The employee reported clicking the phishing link. |
-
 | T1056.003 | Input Capture: Web Portal Capture | The employee reported submitting work credentials to the simulated login page. |
-
 | T1078.004 | Valid Accounts: Cloud Accounts | The compromised employee account was used for the successful unauthorized Microsoft 365 authentication. |
-
 | T1530 | Data from Cloud Storage | The unauthorized session accessed and successfully downloaded financial files from OneDrive. |
-
 | T1564.008 | Hide Artifacts: Email Hiding Rules | The unauthorized session created an inbox rule that marked security-related messages as read and moved them to Deleted Items. |
 
 
 
-\*\*Analyst Finding:\*\* ATT\&CK mapping was based on behaviors supported by the available evidence. Techniques were not added solely because they could have occurred during this type of attack.
+**Analyst Finding:** ATT&CK mapping was based on behaviors supported by the available evidence. Techniques were not added solely because they could have occurred during this type of attack.
 
 
 
-\## Containment and Remediation
+## Containment and Remediation
 
 
 
@@ -326,19 +305,19 @@ Following confirmation of the account compromise and data exfiltration, the foll
 
 
 
-\- Reset the compromised employee's Microsoft 365 password.
+- Reset the compromised employee's Microsoft 365 password.
 
-\- Revoke active sessions and authentication tokens associated with the account.
+- Revoke active sessions and authentication tokens associated with the account.
 
-\- Remove the unauthorized inbox rule.
+- Remove the unauthorized inbox rule.
 
-\- Correct the unintended Conditional Access exclusion and verify that the employee is covered by the organization's MFA requirement for external sign-ins.
+- Correct the unintended Conditional Access exclusion and verify that the employee is covered by the organization's MFA requirement for external sign-ins.
 
-\- Search Microsoft 365 audit and authentication logs for additional unauthorized activity associated with the account and source IP `198.51.100.219`.
+- Search Microsoft 365 audit and authentication logs for additional unauthorized activity associated with the account and source IP `198.51.100.219`.
 
-\- Review affected vendor and payment processes for potential follow-on financial fraud.
+- Review affected vendor and payment processes for potential follow-on financial fraud.
 
-\- Preserve relevant email, authentication, mailbox, OneDrive, and audit evidence for continued investigation.
+- Preserve relevant email, authentication, mailbox, OneDrive, and audit evidence for continued investigation.
 
 
 
@@ -346,11 +325,11 @@ The incident should also be escalated through the organization's established inc
 
 
 
-\*\*Analyst Finding:\*\* Password reset alone should not be treated as complete containment of an actively compromised cloud account. Existing authenticated sessions or tokens should also be addressed, and the security-control gap that allowed the unauthorized authentication should be remediated.
+**Analyst Finding:** Password reset alone should not be treated as complete containment of an actively compromised cloud account. Existing authenticated sessions or tokens should also be addressed, and the security-control gap that allowed the unauthorized authentication should be remediated.
 
 
 
-\## Final Assessment
+## Final Assessment
 
 
 
@@ -370,11 +349,11 @@ The incident was classified as:
 
 
 
-\*\*Malicious — Credential Phishing Resulting in Cloud Account Compromise and Confirmed Data Exfiltration\*\*
+**Malicious — Credential Phishing Resulting in Cloud Account Compromise and Confirmed Data Exfiltration**
 
 
 
-\*\*Severity: High\*\*
+**Severity: High**
 
 
 
@@ -382,11 +361,11 @@ The High severity classification was based on:
 
 
 
-\- Confirmed unauthorized access to the employee's Microsoft 365 account.
+- Confirmed unauthorized access to the employee's Microsoft 365 account.
 
-\- Confirmed exfiltration of three Confidential or Restricted financial files, including vendor/payment and bank-routing information.
+- Confirmed exfiltration of three Confidential or Restricted financial files, including vendor/payment and bank-routing information.
 
-\- Potential financial and business impact resulting from exposure of the affected information.
+- Potential financial and business impact resulting from exposure of the affected information.
 
 
 
@@ -394,7 +373,7 @@ The investigation established exfiltration of the three identified files. The av
 
 
 
-\*\*Analyst Finding:\*\* Severity was determined from the demonstrated impact of the incident rather than the phishing email alone. The incident progressed from credential exposure to confirmed account compromise and unauthorized transfer of sensitive organizational data.
+**Analyst Finding:** Severity was determined from the demonstrated impact of the incident rather than the phishing email alone. The incident progressed from credential exposure to confirmed account compromise and unauthorized transfer of sensitive organizational data.
 
 
 
