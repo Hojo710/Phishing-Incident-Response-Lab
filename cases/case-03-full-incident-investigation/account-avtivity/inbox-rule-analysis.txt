@@ -1,0 +1,51 @@
+CASE 03 - INBOX RULE ANALYSIS
+
+ACCOUNT:
+employee@company.example
+
+RULE CONFIGURATION
+
+Rule Name:
+Security Notifications
+
+Created:
+2026-09-28 08:41:16 -0400
+
+Created From Source IP:
+198.51.100.219
+
+Conditions:
+Subject or body contains:
+"security alert"
+"unusual sign-in"
+"password changed"
+
+Actions:
+Mark message as read
+Move message to Deleted Items
+
+Forwarding Address:
+None
+
+Rule Status:
+Enabled
+
+ANALYST ASSESSMENT
+
+The inbox rule was created during the confirmed unauthorized session from
+198.51.100.219.
+
+The rule was configured to identify messages containing security-related
+terms, mark those messages as read, and move them to Deleted Items. This
+functionality would reduce the likelihood that the employee would notice
+security notifications associated with account activity and is consistent
+with an attempt to conceal unauthorized activity.
+
+The rule contained no forwarding address. Therefore, this rule was not
+configured to forward email messages to an external account. This does not
+rule out other possible methods of email access or exfiltration.
+
+RESPONSE ACTION
+
+Preserve the inbox rule configuration as evidence, then disable or remove
+the unauthorized rule as part of account containment.

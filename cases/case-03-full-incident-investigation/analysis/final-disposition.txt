@@ -1,0 +1,70 @@
+CASE 03 - FINAL INCIDENT DISPOSITION
+
+FINAL CLASSIFICATION:
+Malicious - Credential Phishing Resulting in Cloud Account Compromise
+and Confirmed Data Exfiltration
+
+SEVERITY:
+High
+
+INCIDENT SUMMARY:
+
+The employee received a simulated Microsoft 365 phishing email containing
+a link to a credential-harvesting website. Although SPF, DKIM, and DMARC
+passed for the sender domain, the domain was a lookalike and the email
+used urgency and account-restriction language to encourage interaction.
+
+The employee reported clicking the phishing link and submitting their
+work email address and password to the simulated login page.
+
+Following the credential submission, a successful unauthorized Microsoft
+365 authentication was observed from source IP 198.51.100.219 using a
+new/unknown device.
+
+Review of authentication controls determined that the employee account
+had been unintentionally excluded from the organization's Conditional
+Access policy for external sign-ins. No MFA challenge was issued during
+the unauthorized authentication. The available evidence therefore does
+not establish an MFA bypass.
+
+POST-COMPROMISE ACTIVITY:
+
+Activity associated with the unauthorized session included:
+
+- Mailbox access
+- Creation of an unauthorized inbox rule
+- Mailbox search for "invoice"
+- OneDrive access
+- Successful download of three financial files
+
+The inbox rule was configured to identify security-related messages,
+mark them as read, and move them to Deleted Items. This functionality
+was consistent with an attempt to conceal unauthorized account activity.
+
+DATA IMPACT:
+
+Three files were successfully downloaded during the unauthorized session:
+
+1. Q3-Financial-Forecast.xlsx - Confidential
+2. Vendor-Payment-Details.xlsx - Restricted
+3. Department-Budget-2027.xlsx - Confidential
+
+The affected information included financial forecasts, department budget
+information, vendor/payment information, invoice numbers, and bank-routing
+information.
+
+The successful unauthorized downloads establish confirmed data
+exfiltration of these three files within the simulated incident.
+
+EVIDENCE BOUNDARY:
+
+The available evidence does not establish exfiltration of additional
+files beyond the three identified files.
+
+The investigated inbox rule contained no forwarding address and therefore
+was not configured to forward email externally. This does not rule out
+other possible methods of email access or exfiltration.
+
+No follow-on Business Email Compromise or payment fraud was observed.
+Such activity remains a potential follow-on business risk based on the
+financial information exposed during the incident.

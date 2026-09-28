@@ -1,0 +1,11 @@
+CASE 02 SAFE SIMULATED ATTACHMENT
+
+This is a harmless text file created for the Phishing Email Investigation & Incident Response lab.
+
+Simulated original attachment name:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+This file contains no executable code and is not malware.
+It exists only to practice safe file hashing and static-analysis procedures.
+
+Hash comparison test.

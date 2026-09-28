@@ -1,0 +1,31 @@
+CASE 01 - CREDENTIAL PHISHING
+MITRE ATT&CK MAPPING
+
+T1566.002 - Phishing: Spearphishing Link
+Tactic: Initial Access
+Status: Observed
+
+Evidence:
+The phishing email contained a credential-verification link designed to direct the recipient to a fraudulent Microsoft 365 login page. The email impersonated Microsoft 365 and used urgency and the threat of account suspension to encourage interaction.
+
+
+T1204.001 - User Execution: Malicious Link
+Tactic: Execution
+Status: Intended / Not Observed
+
+Evidence:
+The phishing attempt was designed to persuade the recipient to click the credential-verification link. The recipient reported that they did not click the link, so execution through the malicious link was not observed.
+
+
+T1056.003 - Input Capture: Web Portal Capture
+Tactic: Credential Access
+Status: Intended / Not Observed
+
+Evidence:
+The fraudulent login page was designed to capture the recipient's account credentials. Because the recipient reported that they did not click the link or submit credentials, credential capture was not observed.
+
+
+Analyst Assessment:
+The observed activity supports T1566.002 because a phishing link was delivered to the recipient. T1204.001 and T1056.003 represent intended subsequent stages of the attack but are not treated as observed activity because the recipient reported no interaction with the link.
+
+This distinction prevents the investigation from claiming attacker activity beyond what the available evidence supports.

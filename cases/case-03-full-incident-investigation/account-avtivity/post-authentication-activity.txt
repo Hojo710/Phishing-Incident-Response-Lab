@@ -1,0 +1,151 @@
+CASE 03 - POST-AUTHENTICATION ACCOUNT ACTIVITY
+
+User:
+employee@company.example
+
+Associated Anomalous Source IP:
+198.51.100.219
+
+
+EVENT 1 - MAILBOX ACCESS
+
+Time:
+2026-09-28 08:39:12 -0400
+
+Action:
+Mailbox accessed
+
+Result:
+Success
+
+Source IP:
+198.51.100.219
+
+Analysis:
+Successful mailbox access was observed from the same simulated source IP associated with the anomalous 08:37 authentication.
+
+
+EVENT 2 - INBOX RULE CREATION
+
+Time:
+2026-09-28 08:41:36 -0400
+
+Action:
+Inbox rule created
+
+Rule Name:
+Security Notifications
+
+Conditions:
+Subject or body contains:
+"security alert"
+"unusual sign-in"
+"password changed"
+
+Actions Taken by Rule:
+Mark message as read
+Move message to Deleted Items
+
+Forwarding Address:
+None
+
+Result:
+Success
+
+Source IP:
+198.51.100.219
+
+Analysis:
+The inbox rule was created during the unauthorized session from
+198.51.100.219.
+
+The rule was configured to identify security-related messages, mark
+matching messages as read, and move them to Deleted Items. This
+functionality would reduce the likelihood that the employee would notice
+security notifications associated with account activity and is consistent
+with an attempt to conceal unauthorized activity.
+
+The rule contained no forwarding address and therefore was not configured
+to forward messages to an external account. This does not rule out other
+possible methods of email access or exfiltration.
+
+
+EVENT 3 - MAILBOX SEARCH
+
+Time:
+2026-09-28 08:44:03 -0400
+
+Action:
+Email search performed
+
+Search Term:
+invoice
+
+Result:
+Success
+
+Source IP:
+198.51.100.219
+
+Analysis:
+The unauthorized session searched the mailbox for the term "invoice."
+
+This may indicate interest in financial or billing-related information. The search itself does not establish that specific financial information was obtained.
+
+
+EVENT 4 - ONEDRIVE FILE ACCESS
+
+Time:
+2026-09-28 08:46:27 -0400
+
+Action:
+OneDrive file accessed
+
+File:
+Q3-Financial-Forecast.xlsx
+
+Result:
+Success
+
+Source IP:
+198.51.100.219
+
+Analysis:
+The financial forecast file was successfully accessed from the same source IP associated with the unauthorized authentication.
+
+The available evidence establishes file access but does not establish that the file was downloaded, transferred, exported, or otherwise exfiltrated.
+
+
+CORRELATION ASSESSMENT
+
+All four post-authentication events originated from 198.51.100.219, the same simulated source IP associated with the anomalous successful authentication at 08:37.
+
+The correlated evidence supports unauthorized post-authentication activity within the employee's Microsoft 365 account.
+
+Observed activity includes successful mailbox access, creation of an inbox rule, a mailbox search for "invoice," and access to Q3-Financial-Forecast.xlsx.
+
+
+EVIDENCE BOUNDARY
+
+Observed:
+- Unauthorized account authentication
+- Mailbox access
+- Inbox rule creation
+- Search for "invoice"
+- Access to Q3-Financial-Forecast.xlsx
+
+Not Currently Established:
+- Email deletion
+- Email forwarding
+- File download
+- File transfer
+- Data exfiltration
+- Additional account compromise
+- Attacker intent behind the inbox rule or mailbox search
+
+Additional evidence would be required before claiming that information was stolen or exfiltrated.
+
+
+LAB NOTE
+
+The account activity, IP addresses, filenames, and other values documented in this case are simulated or reserved training data.

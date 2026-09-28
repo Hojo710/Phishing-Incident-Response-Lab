@@ -1,0 +1,70 @@
+CASE 02 - MALICIOUS ATTACHMENT
+CONTAINMENT AND REMEDIATION
+
+Case Disposition:
+Malicious Attachment / Malware Delivery Attempt
+
+Current Impact:
+The employee reported that the attachment was not opened or executed.
+
+No evidence currently establishes execution of the malicious attachment on the employee endpoint.
+
+No endpoint compromise or credential compromise has been observed.
+
+
+IMMEDIATE CONTAINMENT
+
+1. Quarantine or remove the malicious phishing email from the recipient's mailbox.
+
+2. Search the organization's email environment for additional messages associated with the phishing campaign.
+
+Search indicators may include:
+- Sender: payroll@company-payroll.example
+- Reply-To: payroll-documents@employee-services.example
+- Subject: CONFIDENTIAL: 2026 Employee Salary Adjustment
+- Attachment: Employee_Salary_Adjustments_2026.pdf.exe
+- Source IP: 198.51.100.84
+
+3. Quarantine or remove matching malicious messages discovered in other employee mailboxes.
+
+4. Block identified malicious campaign indicators through appropriate email and security controls where supported.
+
+5. Identify additional recipients and determine whether any users opened or executed the attachment.
+
+
+ENDPOINT RESPONSE
+
+Endpoint isolation is not recommended for the original recipient based solely on the currently available evidence.
+
+The employee reported that the attachment was not opened, and no endpoint telemetry currently indicates execution or compromise.
+
+If later evidence indicates that the attachment was executed, endpoint containment should be escalated and the affected system should be investigated for process execution, file creation, network activity, persistence, and other indicators of compromise.
+
+
+ACCOUNT RESPONSE
+
+No evidence currently establishes credential or session compromise for the original recipient.
+
+Credential resets or session revocation are not recommended solely because the phishing email was received.
+
+If subsequent investigation identifies malicious execution or evidence of account compromise, credential and session containment should be considered according to organizational incident-response procedures.
+
+
+FOLLOW-UP ACTIONS
+
+Preserve the phishing email and relevant investigation evidence.
+
+Document all identified recipients and user-interaction findings.
+
+Review available email, endpoint, authentication, and network telemetry for evidence associated with any users who interacted with the attachment.
+
+Notify affected users according to organizational procedures.
+
+Escalate containment if additional evidence of execution, credential compromise, or lateral activity is identified.
+
+
+EVIDENCE LIMITATION
+
+The malicious behavior documented in this case was observed in the simulated sandbox scenario and not on the original employee endpoint.
+
+Containment recommendations are therefore based on the evidence currently available and should be adjusted if new evidence changes the scope or impact of the incident.

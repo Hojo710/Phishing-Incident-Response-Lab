@@ -1,0 +1,41 @@
+CASE 02 - MALICIOUS ATTACHMENT
+FILE SIGNATURE ANALYSIS
+
+Simulated Suspicious Attachment:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+Safe Training Artifact:
+Employee_Salary_Adjustments.txt
+
+Purpose:
+A harmless text file was used to practice inspecting file contents with Format-Hex without creating or executing a suspicious executable. The results below belong only to the safe training artifact.
+
+Static Analysis Method:
+The safe training artifact was inspected using PowerShell Format-Hex. This allowed the beginning bytes of the file to be examined without executing the file.
+
+Observed Training Artifact Signature:
+Beginning hexadecimal bytes:
+43 41 53 45
+
+ASCII representation:
+CASE
+
+Analysis:
+The observed bytes are consistent with the plain-text contents of the safe training artifact.
+
+For comparison, a Windows PE executable commonly begins with hexadecimal bytes 4D 5A, represented as "MZ". A PDF commonly begins with a signature corresponding to "%PDF-".
+
+Simulated Attachment Assessment:
+The phishing email presented the simulated attachment as:
+
+Employee_Salary_Adjustments_2026.pdf.exe
+
+The final .exe extension indicates that the simulated attachment is presented as a Windows executable rather than a PDF. In a real investigation, examining the file signature would provide additional evidence about the file's actual format.
+
+If a file presented as a PDF instead contained a Windows PE executable signature, the mismatch would increase suspicion and could indicate an attempt to disguise the file's actual type.
+
+Analyst Note:
+A Windows executable file type does not independently establish that a file is malicious. File type, filename, hash reputation, email context, and other available evidence should be correlated before assigning a final disposition.
+
+Case Limitation:
+Because this lab uses a harmless text artifact rather than an actual executable, no PE signature was observed and no claim is made that executable code was analyzed.

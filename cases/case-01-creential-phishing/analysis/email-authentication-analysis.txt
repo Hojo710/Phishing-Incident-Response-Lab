@@ -1,0 +1,22 @@
+CASE 01 - CREDENTIAL PHISHING
+EMAIL AUTHENTICATION ANALYSIS
+
+Observed Authentication Results:
+- SPF: FAIL
+- DKIM: NONE
+- DMARC: FAIL
+
+SPF Analysis:
+The SPF check failed for microsoft-account-alert.example. This indicates that the sending system did not pass the SPF authorization check for the evaluated domain. An SPF failure increases suspicion but does not independently prove that a message is malicious.
+
+DKIM Analysis:
+The message returned DKIM=none. No DKIM authentication result/signature was available to validate for this message. This does not indicate that the message was modified in transit; it means DKIM did not provide a successful authentication result for the investigation.
+
+DMARC Analysis:
+DMARC failed for the visible From domain. The message did not have a successful aligned authentication path through SPF or DKIM.
+
+Analyst Assessment:
+The authentication results do not support the claimed sender identity. When combined with the suspicious sender domain, mismatched Reply-To domain, credential-verification link, and urgency in the message body, the authentication failures strengthen the assessment that the email is suspicious.
+
+Important Analyst Note:
+Email authentication results should be treated as evidence rather than a final verdict. SPF, DKIM, and DMARC can pass for an attacker-controlled domain, so successful authentication alone does not establish that an email is legitimate.

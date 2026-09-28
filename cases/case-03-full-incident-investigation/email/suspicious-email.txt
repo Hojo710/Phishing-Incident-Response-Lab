@@ -1,0 +1,28 @@
+From: Microsoft 365 Security <security@microsoft365-security.example>
+Reply-To: account-review@identity-verification.example
+To: employee@company.example
+Subject: Unusual Sign-In Detected - Immediate Verification Required
+Date: Mon, 28 Sep 2026 08:14:32 -0400
+Message-ID: <20260928121432.68421@microsoft365-security.example>
+
+Authentication-Results:
+    spf=pass smtp.mailfrom=microsoft365-security.example;
+    dkim=pass header.d=microsoft365-security.example;
+    dmarc=pass header.from=microsoft365-security.example
+
+Received: from mail.microsoft365-security.example (203.0.113.142)
+    by mail.company.example;
+    Mon, 28 Sep 2026 08:14:31 -0400
+
+Microsoft 365 Security
+
+We detected an unusual sign-in attempt associated with your Microsoft 365 account.
+
+For your protection, access to Microsoft Teams, Outlook, and OneDrive may be restricted unless your identity is verified.
+
+Review Recent Activity:
+https://microsoft365-account-review.example/security
+
+You must complete verification within 30 minutes to prevent temporary account restrictions.
+
+Microsoft 365 Account Protection

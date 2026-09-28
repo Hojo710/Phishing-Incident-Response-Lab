@@ -1,0 +1,34 @@
+CASE 02 - MALICIOUS ATTACHMENT
+FILE HASH ANALYSIS
+
+Simulated Suspicious Attachment:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+Safe Training Artifact:
+Employee_Salary_Adjustments.txt
+
+Purpose:
+A harmless text file was used to practice file hashing procedures without creating or executing a suspicious executable. The hashes below belong only to the safe training artifact and are not hashes of the simulated .pdf.exe attachment.
+
+Hash Algorithm:
+SHA-256
+
+Original SHA-256:
+C6AD4A13D02F991FBF47B71C32B579708F34B27BF24849D65D251551A92ACD0A
+
+Modification:
+The line "Hash comparison test." was added to the safe training artifact.
+
+Modified SHA-256:
+60DBBFEBEFD68A63D69EFA405F457EEC1C30E8D56693B5D53A3ADD321F766DC6
+
+Analysis:
+The SHA-256 value changed after the contents of the file were modified. Although the filename remained the same, the different hashes demonstrate that the two versions are not byte-for-byte identical.
+
+A cryptographic hash can be used to identify an exact file, compare observed files, verify whether file contents have changed, and search reputation or threat-intelligence sources without executing the file.
+
+Analyst Note:
+A SHA-256 hash does not determine whether a file is malicious. A hash with no available reputation data should be treated as unknown rather than automatically safe or malicious.
+
+Case Limitation:
+Because this lab uses a harmless text artifact rather than the simulated executable described in the phishing email, no malware behavior or malicious file reputation is claimed from this hashing exercise.

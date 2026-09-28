@@ -1,0 +1,71 @@
+CASE 03 - CONTAINMENT AND ESCALATION
+
+SEVERITY:
+High
+
+IMMEDIATE CONTAINMENT ACTIONS
+
+1. Reset the password for employee@company.example because the employee
+   reported submitting credentials to the phishing site and subsequent
+   evidence confirmed unauthorized account access.
+
+2. Revoke active Microsoft 365 sessions and authentication tokens to
+   terminate existing authenticated sessions associated with the
+   compromised account.
+
+3. Preserve the unauthorized inbox rule configuration as evidence, then
+   disable or remove the rule.
+
+4. Remove the employee account's unintended Conditional Access exclusion
+   and verify that the organization's MFA requirement for external
+   sign-ins is correctly applied.
+
+5. Review Microsoft 365 authentication, mailbox, and OneDrive audit logs
+   to identify additional unauthorized activity and determine the full
+   scope of the incident.
+
+6. Investigate activity associated with source IP 198.51.100.219 and
+   search for additional accounts or resources accessed from the same
+   source.
+
+7. Review the affected financial files and related vendor/payment
+   processes for potential follow-on fraud risk.
+
+ESCALATION AND NOTIFICATION
+
+1. SOC / Security Leadership
+   Escalate the incident to the SOC manager, incident response team, or
+   appropriate security leadership because the investigation confirmed
+   unauthorized account access and data exfiltration.
+
+2. Identity / Microsoft 365 Administration
+   Coordinate account containment, session and token revocation, password
+   reset, Conditional Access remediation, and verification of MFA coverage.
+
+3. Finance / Accounts Payable
+   Notify the appropriate financial data owners because Confidential and
+   Restricted financial information was accessed and downloaded. Review
+   vendor and payment activity for potential follow-on fraud.
+
+4. Legal / Privacy / Compliance
+   Escalate the confirmed data exposure so the appropriate teams can
+   determine whether contractual, regulatory, privacy, or notification
+   requirements apply.
+
+5. Management / Executive Leadership
+   Notify appropriate management through the organization's established
+   incident-response escalation process because of the High severity,
+   confirmed account compromise, and financial-data exfiltration.
+
+FOLLOW-ON BUSINESS RISK
+
+The unauthorized user searched the mailbox for "invoice" and downloaded
+vendor and payment information, including bank-routing information.
+
+This creates a potential follow-on risk of financial fraud or Business
+Email Compromise (BEC), including attempts to impersonate trusted vendors
+or manipulate payment instructions.
+
+No follow-on BEC or payment fraud has been observed in the available
+evidence. This is a potential business risk identified from the confirmed
+incident activity.

@@ -1,0 +1,100 @@
+CASE 03 - MICROSOFT 365 SIGN-IN ACTIVITY
+
+User:
+employee@company.example
+
+
+EVENT 1 - BASELINE / KNOWN ACTIVITY
+
+Time:
+2026-09-28 08:02:11 -0400
+
+Source IP:
+192.0.2.44
+
+Location:
+New York, NY, US
+
+Application:
+Microsoft Outlook
+
+Authentication Result:
+Success
+
+MFA Result:
+Satisfied
+
+Device:
+COMPANY-LAPTOP-27
+
+Device Status:
+Known Device
+
+
+EVENT 2 - ANOMALOUS ACTIVITY
+
+Time:
+2026-09-28 08:37:54 -0400
+
+Source IP:
+198.51.100.219
+
+Location:
+Amsterdam, Netherlands
+
+Application:
+Microsoft 365
+
+Authentication Result:
+Success
+
+MFA Result:
+Not Satisfied
+
+Device:
+Unknown
+
+Device Status:
+New Device
+
+
+TIMELINE CORRELATION
+
+08:02:
+Successful authentication from New York using the employee's known company laptop. MFA was satisfied.
+
+08:14:
+The simulated phishing email was received.
+
+After 08:14:
+The employee reported clicking the verification link and submitting their work email address and password.
+
+08:37:
+A successful Microsoft 365 authentication occurred from Amsterdam using an unknown/new device. MFA was not satisfied.
+
+
+ANALYST ASSESSMENT
+
+Event 1 is consistent with the available baseline information for the employee because the authentication originated from the known company laptop and MFA was satisfied.
+
+Event 2 is anomalous because it occurred shortly after the employee reported submitting credentials to the suspicious website and differs from the earlier activity in geographic location, device status, and MFA result.
+
+The rapid geographic change between New York and Amsterdam is consistent with an impossible-travel indicator. Geographic information alone would not establish compromise because IP geolocation, VPNs, proxies, and other infrastructure can affect apparent location.
+
+However, when Event 2 is correlated with the employee's reported credential submission, successful authentication, unknown/new device, and differing MFA result, the available evidence supports unauthorized account access and account compromise.
+
+
+EVIDENCE BOUNDARY
+
+The available evidence establishes successful anomalous authentication to the employee's account.
+
+The current evidence does not yet establish what actions were performed after authentication.
+
+No claim is currently made that email was accessed, files were downloaded, inbox rules were created, additional credentials were obtained, or persistence was established.
+
+Additional account-activity evidence is required to determine the scope of post-authentication activity.
+
+
+LAB NOTE
+
+The IP addresses, locations, account activity, and other values in this document are simulated or reserved training data used for this cybersecurity lab.

@@ -1,0 +1,33 @@
+From: Corporate Payroll <payroll@company-payroll.example>
+Reply-To: payroll-documents@employee-services.example
+To: employee@company.example
+Subject: CONFIDENTIAL: 2026 Employee Salary Adjustment
+Date: Sat, 19 Sep 2026 14:18:43 -0400
+Message-ID: <20260919181843.73152@company-payroll.example>
+
+Authentication-Results:
+    spf=fail smtp.mailfrom=company-payroll.example;
+    dkim=none;
+    dmarc=fail header.from=company-payroll.example
+
+Received: from mail.company-payroll.example (198.51.100.84)
+    by mail.company.example;
+    Sat, 19 Sep 2026 14:18:42 -0400
+
+Corporate Payroll
+
+An updated employee compensation document has been prepared for you.
+
+Due to payroll processing requirements, all employees must review
+their updated salary information before the end of the day.
+
+Please open the attached document and confirm that the information
+is accurate.
+
+Attachment:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+This document contains confidential compensation information.
+Do not forward this email.
+
+Corporate Payroll Department

@@ -1,0 +1,45 @@
+CASE 03 - EMPLOYEE STATEMENT
+
+Employee:
+employee@company.example
+
+Reported Interaction:
+
+The employee reported receiving an unexpected Microsoft 365 security notification.
+
+The employee stated:
+
+"I clicked the Review Recent Activity link because I thought the email was from Microsoft. The page looked like a Microsoft 365 login page. I entered my work email address and password and clicked Sign In. The page displayed an error afterward, so I closed it. I did not download or open any files."
+
+
+ANALYST OBSERVATIONS
+
+Based on the employee's statement, the following actions are reported:
+
+1. The employee clicked the link contained in the suspicious email.
+
+2. The employee reached a webpage presented as a Microsoft 365 login page.
+
+3. The employee entered their work email address and password.
+
+4. The employee submitted those credentials by selecting Sign In.
+
+5. The employee reported that the webpage displayed an error afterward.
+
+6. The employee reported that no files were downloaded or opened.
+
+
+EVIDENCE ASSESSMENT
+
+The employee statement establishes reported user interaction with the suspicious website and reported submission of work credentials.
+
+The submitted credentials should be treated as exposed.
+
+The employee statement alone does not establish that an unauthorized individual successfully authenticated to the employee's Microsoft 365 account or that additional account activity occurred.
+
+Authentication and account-activity evidence must be reviewed separately to determine whether the exposed credentials were subsequently used.
+
+
+EVIDENCE SOURCE
+
+The findings documented above are based on the employee's reported actions. They should be distinguished from independently observed authentication, endpoint, or network telemetry.

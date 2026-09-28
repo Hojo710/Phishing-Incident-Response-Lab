@@ -1,0 +1,83 @@
+CASE 03 - MFA / CONDITIONAL ACCESS POLICY REVIEW
+
+User:
+employee@company.example
+
+
+MFA REGISTRATION
+
+Registered Method:
+Microsoft Authenticator
+
+Status:
+Registered
+
+
+EXPECTED ACCESS POLICY
+
+Normal Sign-In Policy:
+MFA is required for external sign-ins.
+
+Expected Behavior:
+An external authentication attempt should be evaluated by the applicable Conditional Access policy and require MFA when the policy conditions are met.
+
+
+08:37 AUTHENTICATION REVIEW
+
+Source IP:
+198.51.100.219
+
+Device:
+Unknown / New Device
+
+MFA Result:
+Not Satisfied
+
+MFA Challenge Issued:
+No
+
+Conditional Access Policy Applied:
+No
+
+
+POLICY REVIEW FINDING
+
+The employee account was unintentionally excluded from the organization's Conditional Access policy requiring MFA for external sign-ins.
+
+As a result, the 08:37 external authentication was not evaluated under the expected MFA requirement, and no MFA challenge was issued.
+
+
+ANALYST ASSESSMENT
+
+The available evidence does not support describing the authentication as an MFA bypass.
+
+An MFA bypass would imply that an MFA control was applied and subsequently defeated, circumvented, or otherwise overcome.
+
+In this incident, the evidence indicates that the expected Conditional Access policy was not applied because the employee account was excluded from the policy.
+
+The unauthorized authentication therefore succeeded without an MFA challenge being issued.
+
+This represents a security-control configuration gap that contributed to the account compromise.
+
+
+IMMEDIATE ACCOUNT RESPONSE
+
+1. Reset the employee's Microsoft 365 password because the employee reported submitting the credentials to the phishing site and subsequent evidence supports unauthorized use.
+
+2. Revoke active authentication sessions/tokens associated with the employee account to contain existing authenticated access.
+
+3. Remove the unintended Conditional Access exclusion and ensure the account is covered by the organization's MFA requirement for external sign-ins.
+
+4. Review the corrected policy configuration to verify that the intended MFA requirement is applied.
+
+
+EVIDENCE BOUNDARY
+
+The evidence establishes that no MFA challenge was issued during the anomalous authentication and that the employee account was excluded from the applicable Conditional Access policy.
+
+The evidence does not establish that an attacker defeated an MFA challenge or used a specific MFA-bypass technique.
+
+
+LAB NOTE
+
+The authentication activity, policy configuration, IP addresses, and account information documented in this case are simulated or reserved training data.

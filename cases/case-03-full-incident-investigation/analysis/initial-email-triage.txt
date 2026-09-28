@@ -1,0 +1,81 @@
+CASE 03 - FULL INCIDENT INVESTIGATION
+INITIAL EMAIL TRIAGE
+
+Reported Issue:
+An employee reported an unexpected Microsoft 365 security notification. The employee later reported interacting with the link in the message. User interaction will be investigated separately from the initial email analysis.
+
+Sender:
+security@microsoft365-security.example
+
+Reply-To:
+account-review@identity-verification.example
+
+Sender Domain:
+microsoft365-security.example
+
+Reply-To Domain:
+identity-verification.example
+
+Source IP:
+203.0.113.142
+
+URL:
+https://microsoft365-account-review.example/security
+
+URL Domain:
+microsoft365-account-review.example
+
+
+EMAIL AUTHENTICATION
+
+SPF:
+Pass
+
+DKIM:
+Pass
+
+DMARC:
+Pass
+
+Analysis:
+The message successfully passed SPF, DKIM, and DMARC authentication for the sending domain. These results indicate successful authentication and alignment but do not establish that the domain belongs to Microsoft or that the message is legitimate.
+
+An attacker-controlled or lookalike domain can be configured with valid email authentication records.
+
+
+SENDER AND REPLY-TO ANALYSIS
+
+The From address uses microsoft365-security.example while the Reply-To address uses identity-verification.example.
+
+The different domains increase suspicion and warrant additional investigation. A From and Reply-To mismatch is not independently sufficient to classify a message as malicious.
+
+
+URL ANALYSIS
+
+The message directs the recipient to microsoft365-account-review.example, introducing a third domain into the communication.
+
+The URL uses HTTPS. HTTPS can provide an encrypted connection and certificate validation for the destination domain, but it does not establish that the domain belongs to Microsoft or that the website itself is trustworthy.
+
+
+SOCIAL ENGINEERING
+
+The message claims that an unusual sign-in was detected and warns that access to Microsoft Teams, Outlook, and OneDrive may be restricted.
+
+The recipient is instructed to complete verification within 30 minutes.
+
+These statements create urgency and fear of service disruption in an attempt to persuade the recipient to click the verification link and interact with the destination page.
+
+
+INITIAL ASSESSMENT
+
+Disposition:
+Suspicious - Further Investigation Required
+
+The combination of domain inconsistencies, Microsoft-themed impersonation, urgency-based social engineering, and the separate verification domain raises significant suspicion.
+
+However, the email evidence alone does not establish that credentials were submitted, stolen, or subsequently used. User-interaction and account-activity evidence must be analyzed separately before determining whether account compromise occurred.
+
+
+LAB NOTE
+
+All domains and IP addresses used in this case are simulated or reserved training values. They should not be interpreted as real-world malicious infrastructure.

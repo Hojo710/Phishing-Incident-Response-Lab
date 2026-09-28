@@ -1,0 +1,63 @@
+CASE 03 - MITRE ATT&CK MAPPING
+
+1. T1566.002 - Phishing: Spearphishing Link
+Tactic: Initial Access
+Status: Observed
+
+Evidence:
+The employee received a phishing email containing a link to a simulated
+credential-harvesting website.
+
+
+2. T1204.001 - User Execution: Malicious Link
+Tactic: Execution
+Status: Observed
+
+Evidence:
+The employee reported clicking the link contained in the phishing email.
+
+
+3. T1056.003 - Input Capture: Web Portal Capture
+Tactic: Credential Access
+Status: Observed
+
+Evidence:
+The employee reported entering and submitting their work email address
+and password into the simulated Microsoft 365 login page.
+
+
+4. T1078.004 - Valid Accounts: Cloud Accounts
+Status: Observed
+
+Evidence:
+A successful unauthorized Microsoft 365 authentication was observed from
+source IP 198.51.100.219 using the compromised employee account.
+
+
+5. T1530 - Data from Cloud Storage
+Tactic: Collection
+Status: Observed
+
+Evidence:
+The unauthorized Microsoft 365 session accessed OneDrive and successfully
+downloaded three Confidential or Restricted financial files.
+
+
+6. T1564.008 - Hide Artifacts: Email Hiding Rules
+Tactic: Defense Evasion
+Status: Observed
+
+Evidence:
+During the unauthorized session, an inbox rule was created that matched
+security-related messages, marked them as read, and moved them to
+Deleted Items.
+
+
+EVIDENCE BOUNDARY
+
+The available evidence does not establish use of an email forwarding rule.
+The recovered inbox rule contained no forwarding address.
+
+The successful unauthorized downloads establish data exfiltration within
+this simulated incident, but the available evidence does not establish
+additional files or data exfiltrated beyond the three identified files.

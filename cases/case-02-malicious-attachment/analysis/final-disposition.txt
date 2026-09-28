@@ -1,0 +1,91 @@
+CASE 02 - MALICIOUS ATTACHMENT
+FINAL DISPOSITION
+
+Classification:
+Malicious - Phishing / Malware Delivery Attempt
+
+Severity:
+Low
+
+User Interaction:
+Not Observed - Employee reported that the attachment was not opened.
+
+Endpoint Compromise:
+Not Observed
+
+Credential Compromise:
+Not Observed
+
+
+SUMMARY
+
+The investigated email was determined to be a malicious phishing attempt designed to persuade the recipient to open a disguised executable attachment.
+
+The email contained multiple suspicious indicators, including a mismatch between the sender and Reply-To addresses, failed SPF and DMARC authentication, no DKIM signature available for validation, urgency-based social engineering, and an attachment using the deceptive double-extension filename:
+
+Employee_Salary_Adjustments_2026.pdf.exe
+
+The final .exe extension presented the attachment as a Windows executable rather than a PDF.
+
+
+STATIC ANALYSIS
+
+Safe static-analysis procedures were practiced using a harmless text training artifact rather than the simulated executable.
+
+SHA-256 hashing demonstrated that modifying file contents changes the resulting hash and that a hash can be used to identify and compare exact file contents without executing the file.
+
+File-signature analysis of the harmless training artifact identified the beginning hexadecimal bytes:
+
+43 41 53 45
+
+These bytes corresponded to "CASE" in ASCII and were consistent with the contents of the plain-text training artifact.
+
+No PE executable signature was observed in the training artifact. The Windows PE signature "MZ" was discussed only as a comparison and was not observed in the analyzed file.
+
+Strings analysis demonstrated how readable artifacts can provide investigative leads without proving that referenced behaviors occurred.
+
+
+SIMULATED DYNAMIC ANALYSIS
+
+During the simulated sandbox scenario, execution of
+Employee_Salary_Adjustments_2026.pdf.exe resulted in the following observed behavior:
+
+- powershell.exe was launched.
+- Network communication with update-payroll.example was observed.
+- C:\Users\Public\payroll-update.exe was created.
+- payroll-update.exe was subsequently executed.
+
+These behaviors were observed only in the simulated sandbox environment and were not observed on the employee endpoint.
+
+
+MITRE ATT&CK
+
+T1566.001 - Phishing: Spearphishing Attachment
+Status: Observed
+
+T1204.002 - User Execution: Malicious File
+Status: Intended / Not Observed on Employee Endpoint
+
+T1059.001 - Command and Scripting Interpreter: PowerShell
+Status: Observed in Simulated Sandbox Only
+
+T1105 - Ingress Tool Transfer
+Status: Potentially Supported / Requires Additional Evidence
+
+
+FINAL ASSESSMENT
+
+The correlated phishing indicators and simulated sandbox behavior support classifying the email and simulated attachment as malicious within the lab scenario.
+
+The employee reported that the attachment was not opened. No available evidence establishes execution of the attachment, malicious process activity, credential compromise, or endpoint compromise on the employee's system.
+
+Containment should therefore focus on quarantining the phishing message, searching the email environment for additional recipients or matching messages, and determining whether any other users interacted with the attachment.
+
+Endpoint or account containment should be escalated if additional evidence identifies execution, compromise, or unauthorized account activity.
+
+
+EVIDENCE LIMITATION
+
+This case is a controlled cybersecurity training scenario. The executable attachment and sandbox behavior are simulated.
+
+The static-analysis exercises were performed against a harmless text artifact. No real malware was created or executed during this lab.

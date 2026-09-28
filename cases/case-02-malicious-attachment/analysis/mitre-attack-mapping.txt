@@ -1,0 +1,81 @@
+CASE 02 - MALICIOUS ATTACHMENT
+MITRE ATT&CK MAPPING
+
+Case:
+Simulated payroll-themed phishing email containing:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+
+1. T1566.001 - Phishing: Spearphishing Attachment
+
+Tactic:
+Initial Access
+
+Evidence Status:
+Observed
+
+Evidence:
+The simulated phishing email delivered the attachment
+Employee_Salary_Adjustments_2026.pdf.exe to the recipient.
+
+Analysis:
+The attachment was delivered through a phishing email that used payroll and salary-adjustment themes to encourage the recipient to open the file.
+
+
+2. T1204.002 - User Execution: Malicious File
+
+Tactic:
+Execution
+
+Evidence Status:
+Intended / Not Observed on Employee Endpoint
+
+Evidence:
+The phishing email instructed the employee to open the attached file and review salary information. The employee reported that the attachment was not opened.
+
+Analysis:
+The social-engineering attempt was designed to persuade the recipient to execute the malicious attachment. However, no evidence establishes that the employee opened or executed the file.
+
+
+3. T1059.001 - Command and Scripting Interpreter: PowerShell
+
+Tactic:
+Execution
+
+Evidence Status:
+Observed in Simulated Sandbox Only
+
+Evidence:
+During simulated sandbox execution,
+Employee_Salary_Adjustments_2026.pdf.exe launched powershell.exe.
+
+Analysis:
+PowerShell execution was directly observed in the simulated sandbox environment. This behavior was not observed on the employee endpoint and should not be attributed to the employee's system.
+
+
+4. T1105 - Ingress Tool Transfer
+
+Tactic:
+Command and Control
+
+Evidence Status:
+Potentially Supported / Requires Additional Evidence
+
+Evidence:
+The simulated sandbox showed powershell.exe communicating with
+update-payroll.example. A secondary executable,
+C:\Users\Public\payroll-update.exe, was subsequently created and executed.
+
+Analysis:
+The sequence is consistent with a possible second-stage payload transfer. However, the available simulated evidence does not directly establish that payroll-update.exe was transferred from update-payroll.example. Additional network or sandbox evidence would be required to make that claim.
+
+
+EVIDENCE BOUNDARY
+
+The phishing email provides evidence of attachment delivery to the recipient.
+
+The simulated sandbox provides evidence of behavior that occurred when the simulated attachment was executed in that separate environment.
+
+Sandbox behavior does not establish that the same execution occurred on the employee endpoint.
+
+No employee endpoint compromise is established by the available evidence.

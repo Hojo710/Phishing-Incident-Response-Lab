@@ -1,0 +1,35 @@
+CASE 02 - MALICIOUS ATTACHMENT
+SIMULATED SANDBOX ANALYSIS
+
+Simulated Attachment:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+Analysis Method:
+A simulated sandbox report was used to practice interpreting dynamic-analysis evidence without executing real malware. The behaviors documented below are controlled simulation results and were not observed on a real employee endpoint.
+
+Observed Execution Chain:
+1. Employee_Salary_Adjustments_2026.pdf.exe was executed in the simulated sandbox environment.
+
+2. The attachment launched:
+   powershell.exe
+
+3. PowerShell initiated network communication with:
+   update-payroll.example
+
+4. A secondary executable was written to:
+   C:\Users\Public\payroll-update.exe
+
+5. The newly created payroll-update.exe file was subsequently executed.
+
+Analyst Assessment:
+Unlike the earlier static-analysis findings, these sandbox results represent observed simulated behavior rather than possible functionality inferred from strings.
+
+The observed execution chain demonstrates that the simulated attachment launched a secondary process, initiated network communication, created an additional executable on the system, and executed that file.
+
+When correlated with the phishing email, deceptive double-extension filename, suspicious sender information, and social-engineering context, the simulated dynamic-analysis evidence supports classifying the attachment as malicious within the scenario.
+
+Evidence Limitation:
+These behaviors were observed only in the simulated sandbox scenario. They were not observed on the recipient's actual endpoint. Therefore, this evidence does not establish that the employee executed the attachment or that the employee's system was compromised.
+
+Analyst Note:
+Individual behaviors such as launching PowerShell, making a network connection, or creating a file are not automatically malicious by themselves. The disposition is based on the correlation of the behaviors with the complete phishing investigation and simulated execution chain.

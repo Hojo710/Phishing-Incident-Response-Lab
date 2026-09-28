@@ -1,0 +1,38 @@
+CASE 02 - MALICIOUS ATTACHMENT
+STATIC STRINGS ANALYSIS
+
+Simulated Suspicious Attachment:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+Safe Training Artifact:
+Employee_Salary_Adjustments.txt
+
+Purpose:
+A harmless text file was used to practice examining readable file contents without creating or executing a suspicious executable.
+
+Static Analysis Method:
+The safe training artifact was inspected using PowerShell Get-Content. Because the training artifact is a plain-text file, its readable contents could be displayed directly without executing the file.
+
+Observed Training Artifact Strings:
+CASE 02 SAFE SIMULATED ATTACHMENT
+
+Employee_Salary_Adjustments_2026.pdf.exe
+
+This file contains no executable code and is not malware.
+
+Hash comparison test.
+
+Analysis:
+The observed strings belong to the harmless training artifact and do not indicate malicious behavior.
+
+In a real executable investigation, strings analysis may reveal readable artifacts such as URLs, domain names, IP addresses, filenames, file paths, commands, PowerShell references, registry locations, or other information that may assist an investigation.
+
+Analyst Interpretation:
+Strings extracted from a file provide evidence about information contained within the file, but they do not independently prove that associated behavior occurred.
+
+For example, discovering references to powershell.exe, a URL, and a Windows file path could indicate functionality worth investigating. Static strings alone would not establish that PowerShell executed, a network connection occurred, or a file was written to the endpoint.
+
+Additional endpoint, network, or controlled dynamic-analysis evidence would be required to establish that those behaviors occurred.
+
+Case Limitation:
+Because this lab uses a harmless text artifact rather than an actual executable, no malicious executable strings or malware behavior were analyzed or observed.

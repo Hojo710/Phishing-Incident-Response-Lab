@@ -1,0 +1,110 @@
+CASE 03 - DATA EXFILTRATION ANALYSIS
+
+ACCOUNT:
+employee@company.example
+
+SOURCE IP:
+198.51.100.219
+
+OBSERVED DOWNLOAD ACTIVITY
+
+1. File:
+Q3-Financial-Forecast.xlsx
+
+Operation:
+FileDownloaded
+
+Result:
+Success
+
+Bytes Transferred:
+2,846,720
+
+
+2. File:
+Vendor-Payment-Details.xlsx
+
+Operation:
+FileDownloaded
+
+Result:
+Success
+
+Bytes Transferred:
+684,032
+
+
+3. File:
+Department-Budget-2027.xlsx
+
+Operation:
+FileDownloaded
+
+Result:
+Success
+
+Bytes Transferred:
+1,427,456
+
+CONTENT CLASSIFICATION REVIEW
+
+1. File:
+Q3-Financial-Forecast.xlsx
+
+Contents:
+Internal revenue projections and quarterly forecasts
+
+Classification:
+Confidential
+
+
+2. File:
+Vendor-Payment-Details.xlsx
+
+Contents:
+Vendor names, payment amounts, invoice numbers, and bank-routing information
+
+Classification:
+Restricted
+
+
+3. File:
+Department-Budget-2027.xlsx
+
+Contents:
+Department budget projections
+
+Classification:
+Confidential
+
+IMPACT ASSESSMENT
+
+The employee received a phishing email that used Microsoft 365 impersonation and urgency-based social engineering to direct the employee to a credential-harvesting website. The employee reported entering and submitting their work credentials to the site.
+
+Further investigation identified a successful unauthorized authentication associated with source IP 198.51.100.219. Post-authentication activity from the same source included mailbox access, creation of an inbox rule, a mailbox search for "invoice," and access to the employee's OneDrive data.
+
+Audit evidence established that three files were successfully downloaded during the unauthorized session:
+
+- Q3-Financial-Forecast.xlsx
+- Vendor-Payment-Details.xlsx
+- Department-Budget-2027.xlsx
+
+Content review determined that the affected files contained organizational financial information. Two files were classified as Confidential, while Vendor-Payment-Details.xlsx was classified as Restricted and contained vendor names, payment amounts, invoice numbers, and bank-routing information.
+
+The successful downloads during the unauthorized session support confirmed data exfiltration of these three files within the simulated incident.
+
+SEVERITY ASSESSMENT
+
+Severity:
+High
+
+Rationale:
+The incident progressed beyond phishing and credential exposure to successful unauthorized account access and post-authentication activity. The unauthorized session successfully downloaded three files containing Confidential and Restricted organizational financial information.
+
+The combination of confirmed account compromise, unauthorized mailbox and OneDrive activity, and confirmed exfiltration of sensitive organizational information supports a High severity classification under the lab's incident-severity model.
+
+EVIDENCE BOUNDARY
+
+The available evidence establishes exfiltration of the three identified files. It does not establish that additional files or information were exfiltrated beyond the activity identified during the reviewed session.
+
+The scope should be expanded if additional download, transfer, or unauthorized account activity is identified.
