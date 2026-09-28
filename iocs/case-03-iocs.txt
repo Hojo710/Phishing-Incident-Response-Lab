@@ -1,0 +1,47 @@
+CASE 03 - INDICATORS OF COMPROMISE
+
+SIMULATED TRAINING DATA:
+All indicators below are simulated or reserved values used only for this
+lab. They should not be interpreted as real-world malicious infrastructure.
+
+EMAIL INDICATORS
+
+Suspicious Sender:
+security@microsoft365-security.example
+
+Suspicious Reply-To:
+account-review@identity-verification.example
+
+Sender Domain:
+microsoft365-security.example
+
+Reply-To Domain:
+identity-verification.example
+
+
+CREDENTIAL PHISHING INDICATORS
+
+Credential-Harvesting Domain:
+microsoft365-account-review.example
+
+Credential-Harvesting URL:
+https://microsoft365-account-review.example/security
+
+
+NETWORK INDICATORS
+
+Phishing Email Source IP:
+203.0.113.142
+
+Unauthorized Microsoft 365 Session IP:
+198.51.100.219
+
+
+CONTEXT
+
+The sender, Reply-To, domains, URL, and source IPs were associated with
+the simulated phishing and subsequent unauthorized account activity.
+
+The victim account and affected organizational filenames are not listed
+as malicious IOCs because they represent internal/victim artifacts rather
+than attacker-controlled indicators.

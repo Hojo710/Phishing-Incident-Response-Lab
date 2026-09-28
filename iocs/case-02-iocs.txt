@@ -1,0 +1,63 @@
+CASE 02 - MALICIOUS ATTACHMENT
+INDICATORS OF COMPROMISE / INVESTIGATIVE INDICATORS
+
+IMPORTANT:
+The indicators documented below are simulated or reserved training values used only within this cybersecurity lab. They should not be interpreted as real-world malicious infrastructure.
+
+
+EMAIL / CAMPAIGN INDICATORS
+
+Sender:
+payroll@company-payroll.example
+
+Reply-To:
+payroll-documents@employee-services.example
+
+Sender Domain:
+company-payroll.example
+
+Reply-To Domain:
+employee-services.example
+
+Source IP:
+198.51.100.84
+
+Attachment Filename:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+
+SIMULATED SANDBOX INDICATORS
+
+Network Domain:
+update-payroll.example
+
+Created File:
+C:\Users\Public\payroll-update.exe
+
+
+INDICATOR CONTEXT
+
+The sender address, Reply-To address, associated domains, source IP, and attachment filename were observed in the simulated phishing email and may be used as search pivots when investigating related messages within the lab scenario.
+
+The domain update-payroll.example and the file path C:\Users\Public\payroll-update.exe were observed only in the simulated sandbox scenario. They were not observed on the original employee endpoint.
+
+
+EXCLUDED OBSERVABLES
+
+Recipient:
+employee@company.example
+
+Reason:
+The address belongs to the simulated recipient and is contextual information rather than a malicious campaign indicator.
+
+
+Safe Training Artifact SHA-256:
+60DBBFEBEFD68A63D69EFA405F457EEC1C30E8D56693B5D53A3ADD321F766DC6
+
+Reason:
+This hash belongs to the harmless Employee_Salary_Adjustments.txt training artifact used for the hashing exercise. It is not the hash of the simulated malicious executable and should not be treated as a malicious IOC.
+
+
+ANALYST NOTE
+
+Not every observable identified during an investigation is a malicious IOC. Indicators should be documented with their source and context to avoid incorrectly associating benign or unrelated artifacts with malicious activity.

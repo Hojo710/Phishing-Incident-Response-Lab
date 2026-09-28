@@ -1,0 +1,31 @@
+CASE 01 - CREDENTIAL PHISHING
+INDICATORS / OBSERVABLES
+
+Suspicious Sender Email:
+security@microsoft-account-alert.example
+
+Suspicious Reply-To Email:
+account-verification@secure-login.example
+
+Sender Domain:
+microsoft-account-alert.example
+
+Reply-To Domain:
+secure-login.example
+
+Credential-Verification Domain:
+login-microsoft365.example
+
+Credential-Verification URL:
+https://login-microsoft365.example/verify
+
+Observed Source IP:
+203.0.113.77
+
+Recipient:
+employee@company.example
+
+Notes:
+The recipient address is recorded as case context and is not considered a malicious IOC.
+
+The indicators in this case use reserved/example values for a controlled phishing investigation and should not be interpreted as real malicious infrastructure.
