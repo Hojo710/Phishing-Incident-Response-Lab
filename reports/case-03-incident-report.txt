@@ -1,0 +1,292 @@
+CASE 03 - PHISHING INCIDENT INVESTIGATION REPORT
+
+INCIDENT TYPE:
+Credential Phishing / Cloud Account Compromise / Data Exfiltration
+
+SEVERITY:
+High
+
+FINAL CLASSIFICATION:
+Malicious - Credential Phishing Resulting in Cloud Account Compromise
+and Confirmed Data Exfiltration
+
+AFFECTED ACCOUNT:
+employee@company.example
+
+INCIDENT SUMMARY:
+
+An employee received a simulated Microsoft 365 security notification
+containing a link to a credential-harvesting website. The email used
+urgency and threatened account restrictions to encourage the employee
+to verify their account.
+
+The employee reported clicking the phishing link and submitting their
+work email address and password to the simulated login page.
+
+Following the credential submission, a successful unauthorized Microsoft
+365 authentication was observed from source IP 198.51.100.219 using a
+new/unknown device.
+
+Subsequent investigation identified unauthorized mailbox activity,
+creation of an inbox rule targeting security-related notifications,
+a mailbox search for "invoice", OneDrive access, and successful downloads
+of three Confidential or Restricted financial files.
+
+The incident was classified as High severity because the phishing attack
+progressed to confirmed cloud account compromise and unauthorized
+exfiltration of sensitive organizational financial information.
+
+LAB NOTE:
+
+All domains, IP addresses, accounts, and incident artifacts used in this
+case are simulated or reserved training values. No real credentials,
+malware, accounts, or organizational data were used.
+
+INVESTIGATION TIMELINE
+
+08:02 - LEGITIMATE AUTHENTICATION
+A successful Microsoft 365 authentication occurred from New York using
+the employee's known company laptop. MFA was satisfied.
+
+08:14 - PHISHING EMAIL RECEIVED
+The employee received the simulated Microsoft 365 security email
+containing a link to the credential-harvesting website.
+
+AFTER 08:14 - USER INTERACTION
+The employee reported clicking the phishing link, entering their work
+email address and password, and submitting the credentials. The simulated
+page subsequently displayed an error.
+
+08:37 - UNAUTHORIZED AUTHENTICATION
+A successful Microsoft 365 authentication occurred from source IP
+198.51.100.219 using a new/unknown device. The authentication was
+determined to be unauthorized.
+
+MFA REVIEW
+The unauthorized authentication showed MFA Not Satisfied. Further review
+determined that no MFA challenge was issued because the employee account
+had been unintentionally excluded from the organization's Conditional
+Access policy for external sign-ins.
+
+08:41 - UNAUTHORIZED INBOX RULE
+An inbox rule named "Security Notifications" was created from source IP
+198.51.100.219.
+
+The rule targeted messages containing:
+- "security alert"
+- "unusual sign-in"
+- "password changed"
+
+The rule marked matching messages as read and moved them to Deleted Items.
+
+POST-AUTHENTICATION ACTIVITY
+Activity associated with source IP 198.51.100.219 included:
+- Successful mailbox access
+- Mailbox search for "invoice"
+- OneDrive access
+- Successful downloads of three financial files
+
+DATA EXFILTRATION
+Audit evidence confirmed successful downloads of:
+
+1. Q3-Financial-Forecast.xlsx
+   Classification: Confidential
+
+2. Vendor-Payment-Details.xlsx
+   Classification: Restricted
+
+3. Department-Budget-2027.xlsx
+   Classification: Confidential
+
+TECHNICAL FINDINGS
+
+EMAIL ANALYSIS
+
+The phishing email impersonated Microsoft 365 and directed the employee
+to a simulated credential-harvesting website.
+
+SPF: Pass
+DKIM: Pass
+DMARC: Pass
+
+The successful authentication results indicate that the sending domain
+was authenticated and aligned. They do not establish that the sender was
+legitimate Microsoft infrastructure.
+
+Additional suspicious indicators included:
+- Lookalike sender domain
+- Sender and Reply-To domain mismatch
+- Credential-verification request
+- Urgency and threatened account restrictions
+- Link directing the employee to a separate domain
+
+
+ACCOUNT COMPROMISE
+
+The employee reported submitting their work credentials to the simulated
+phishing website.
+
+A subsequent successful Microsoft 365 authentication from source IP
+198.51.100.219 using a new/unknown device was determined to be
+unauthorized.
+
+Authentication review identified:
+- MFA Result: Not Satisfied
+- MFA Challenge Issued: No
+- Conditional Access Policy Applied: No
+
+The employee account had been unintentionally excluded from the
+organization's Conditional Access policy requiring MFA for external
+sign-ins.
+
+The evidence therefore supports a security-control configuration gap and
+does not establish that the unauthorized user bypassed an MFA challenge.
+
+
+POST-COMPROMISE ACTIVITY
+
+The unauthorized session performed mailbox and OneDrive activity,
+including:
+- Mailbox access
+- Creation of an unauthorized inbox rule
+- Search for "invoice"
+- OneDrive file access
+- Successful download of three financial files
+
+The unauthorized inbox rule targeted security-related notifications,
+marked matching messages as read, and moved them to Deleted Items.
+
+The rule contained no forwarding address and therefore was not configured
+to forward email externally.
+
+DATA IMPACT
+
+Audit evidence confirmed three successful file downloads from OneDrive
+during the unauthorized session:
+
+1. Q3-Financial-Forecast.xlsx
+   Classification: Confidential
+   Contents: Internal revenue projections and quarterly forecasts
+   Bytes Transferred: 2,846,720
+
+2. Vendor-Payment-Details.xlsx
+   Classification: Restricted
+   Contents: Vendor names, payment amounts, invoice numbers, and
+   bank-routing information
+   Bytes Transferred: 684,032
+
+3. Department-Budget-2027.xlsx
+   Classification: Confidential
+   Contents: Department budget projections
+   Bytes Transferred: 1,427,456
+
+The successful downloads from the unauthorized session establish
+confirmed data exfiltration of these three files within the simulated
+incident.
+
+The available evidence does not establish exfiltration of additional
+files beyond those identified during the investigation.
+
+The exposure of vendor and payment information creates potential
+follow-on financial fraud or Business Email Compromise risk. No
+follow-on BEC or payment fraud was observed in the available evidence.
+
+
+MITRE ATT&CK MAPPING
+
+T1566.002 - Phishing: Spearphishing Link
+Status: Observed
+The phishing email delivered a link to the simulated
+credential-harvesting website.
+
+T1204.001 - User Execution: Malicious Link
+Status: Observed
+The employee reported clicking the phishing link.
+
+T1056.003 - Input Capture: Web Portal Capture
+Status: Observed
+The employee reported submitting their work credentials to the
+simulated login page.
+
+T1078.004 - Valid Accounts: Cloud Accounts
+Status: Observed
+The compromised employee account was used for the successful
+unauthorized Microsoft 365 authentication.
+
+T1530 - Data from Cloud Storage
+Status: Observed
+The unauthorized session accessed and successfully downloaded
+financial files from OneDrive.
+
+T1564.008 - Hide Artifacts: Email Hiding Rules
+Status: Observed
+The unauthorized session created an inbox rule that marked
+security-related messages as read and moved them to Deleted Items.
+
+CONTAINMENT AND RESPONSE
+
+Recommended containment and remediation actions include:
+
+- Reset the compromised employee account password.
+- Revoke active Microsoft 365 sessions and authentication tokens.
+- Preserve the unauthorized inbox rule configuration as evidence, then
+  disable or remove the rule.
+- Remove the unintended Conditional Access exclusion and verify that MFA
+  requirements are correctly applied to external sign-ins.
+- Review Microsoft 365 authentication, mailbox, and OneDrive audit logs
+  for additional unauthorized activity.
+- Search for additional activity associated with source IP
+  198.51.100.219.
+- Review affected vendor and payment processes for potential follow-on
+  financial fraud.
+
+
+ESCALATION
+
+The incident should be escalated through the organization's established
+incident-response process to:
+
+- SOC / Security Leadership
+- Incident Response
+- Identity / Microsoft 365 Administration
+- Finance / Accounts Payable
+- Legal / Privacy / Compliance
+- Appropriate Management / Executive Leadership
+
+Legal, Privacy, and Compliance personnel should determine whether any
+contractual, regulatory, privacy, or notification requirements apply
+based on the confirmed exposure.
+
+
+FINAL ASSESSMENT
+
+This investigation confirmed a successful credential-phishing incident
+that progressed to Microsoft 365 account compromise and data
+exfiltration.
+
+The employee reported submitting credentials to a simulated
+credential-harvesting website. Those credentials were subsequently
+associated with a successful unauthorized Microsoft 365 authentication.
+
+The unauthorized session accessed the employee's mailbox, created an
+inbox rule targeting security notifications, searched for "invoice",
+accessed OneDrive, and successfully downloaded three Confidential or
+Restricted financial files.
+
+Authentication review determined that the account had been
+unintentionally excluded from the organization's Conditional Access
+policy for external sign-ins. No MFA challenge was issued. The evidence
+therefore supports a security-control configuration gap rather than an
+MFA bypass.
+
+The incident is classified as:
+
+Malicious - Credential Phishing Resulting in Cloud Account Compromise
+and Confirmed Data Exfiltration
+
+Severity: High
+
+The investigation establishes exfiltration of the three identified
+financial files. Additional data exfiltration, external email forwarding,
+and follow-on Business Email Compromise or payment fraud were not
+established by the available evidence.

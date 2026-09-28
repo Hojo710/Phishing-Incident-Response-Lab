@@ -1,0 +1,97 @@
+CASE 01 - CREDENTIAL PHISHING
+INCIDENT REPORT
+
+Case Type:
+Credential Phishing
+
+Disposition:
+Malicious - Credential Phishing Attempt
+
+Severity:
+Low
+
+Case Summary:
+A user reported an unexpected email claiming that their Microsoft 365 password would expire that day. The message instructed the recipient to verify their account through an embedded link and warned that failure to do so could result in account suspension.
+
+Initial analysis identified multiple indicators consistent with credential phishing, including suspicious sender and Reply-To domains, failed email authentication checks, a credential-verification link using a separate suspicious domain, and urgency-based social engineering.
+
+The recipient reported that they did not click the link or submit credentials. No evidence of credential theft, account compromise, or endpoint compromise was observed during the investigation.
+
+Technical Findings:
+
+Sender Analysis:
+The message displayed "Microsoft 365 Security" as the sender identity but originated from security@microsoft-account-alert.example. The Reply-To address was account-verification@secure-login.example, introducing an additional domain inconsistent with the claimed Microsoft identity.
+
+Email Authentication:
+- SPF: FAIL
+- DKIM: NONE
+- DMARC: FAIL
+
+The authentication results did not support the claimed sender identity. These results were treated as supporting evidence and were correlated with the other phishing indicators rather than used as a standalone verdict.
+
+URL Analysis:
+The message contained the following credential-verification URL:
+https://login-microsoft365.example/verify
+
+The URL used a domain separate from the sender and Reply-To domains and was presented as a Microsoft 365 account-verification page.
+
+Social Engineering Indicators:
+The message attempted to create urgency by claiming that the recipient's password would expire that day and warning that failure to verify the account could result in account suspension.
+
+Source IP:
+203.0.113.77 was observed in the Received header as the source associated with the sending mail system. The available evidence does not establish that this IP hosted the credential-verification website.
+
+IOC Enrichment:
+The phishing infrastructure in this case uses reserved/example values for a controlled simulation. No fabricated real-world reputation results were assigned to the simulated indicators. VirusTotal was used separately with a benign 
+reference domain to practice interpreting reputation data.
+
+MITRE ATT&CK Mapping:
+
+T1566.002 - Phishing: Spearphishing Link
+Tactic: Initial Access
+Status: Observed
+The phishing email delivered a credential-verification link intended to direct the recipient to a fraudulent login page.
+
+T1204.001 - User Execution: Malicious Link
+Tactic: Execution
+Status: Intended / Not Observed
+The attack was designed to persuade the recipient to click the link, but the recipient reported no interaction with it.
+
+T1056.003 - Input Capture: Web Portal Capture
+Tactic: Credential Access
+Status: Intended / Not Observed
+The fraudulent login page was designed to capture account credentials, but no credential submission was observed.
+
+ATT&CK Assessment:
+Only T1566.002 was treated as observed activity. T1204.001 and T1056.003 represent intended subsequent stages of the attack and were not treated as observed because the available evidence does not show that the recipient clicked the link or submitted credentials.
+
+Response and Recommendations:
+
+1. Preserve the reported phishing email and relevant header information as investigation evidence.
+
+2. Quarantine or remove matching phishing messages from affected mailboxes using approved email-security procedures.
+
+3. Block the identified sender, sender domain, Reply-To domain, and credential-verification URL/domain using appropriate email, web, DNS, or other security controls.
+
+4. Search the mail environment for additional recipients of the same or similar message and investigate whether any identified recipients interacted with the phishing link or submitted credentials.
+
+5. Notify the reporting user of the investigation outcome and reinforce established phishing-reporting procedures.
+
+6. No password reset, session revocation, or account containment is recommended based solely on the current evidence because no credential exposure or account compromise was observed.
+
+7. No endpoint isolation is recommended based solely on the current evidence because no malicious attachment, download, execution, or endpoint compromise was observed.
+
+8. Escalate the incident if subsequent investigation identifies user interaction, credential exposure, unauthorized account access, malicious execution, or other evidence of compromise.
+
+Final Analyst Conclusion:
+
+The reported message was assessed as a malicious credential-phishing attempt designed to impersonate Microsoft 365 and direct the recipient to a fraudulent credential-verification page.
+
+The investigation identified multiple correlated phishing indicators, including suspicious sender infrastructure, a mismatched Reply-To domain, failed email authentication checks, a suspicious credential-verification URL, and urgency-based social engineering.
+
+The recipient reported no interaction with the phishing link, and no evidence of credential submission, unauthorized account access, malicious execution, or endpoint compromise was observed. The incident was therefore classified as Malicious - Credential Phishing Attempt with Low severity under the severity model used for this lab.
+
+Recommended response focuses on containing the phishing message and associated indicators, identifying any additional recipients, and escalating the incident if subsequent evidence indicates user interaction or compromise.
+
+Case Status:
+Closed - Malicious Phishing Attempt / No Observed Compromise

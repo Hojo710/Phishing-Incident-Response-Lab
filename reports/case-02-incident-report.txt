@@ -1,0 +1,199 @@
+CASE 02 - PHISHING EMAIL INVESTIGATION & INCIDENT RESPONSE
+MALICIOUS ATTACHMENT INCIDENT REPORT
+
+CASE INFORMATION
+
+Incident Type:
+Phishing - Malicious Attachment / Malware Delivery Attempt
+
+Severity:
+Low
+
+Final Disposition:
+Malicious
+
+User Interaction:
+Not Observed - Employee reported that the attachment was not opened.
+
+Endpoint Compromise:
+Not Observed
+
+Credential Compromise:
+Not Observed
+
+
+EXECUTIVE SUMMARY
+
+An employee reported a suspicious payroll-themed email containing an attachment named Employee_Salary_Adjustments_2026.pdf.exe.
+
+Initial analysis identified multiple suspicious characteristics, including sender and Reply-To inconsistencies, failed SPF and DMARC authentication, no DKIM signature available for validation, urgency-based social engineering, and a deceptive double-extension attachment presented as salary-related documentation.
+
+Safe static-analysis techniques were practiced using a harmless training artifact. Simulated sandbox evidence demonstrated that execution of the simulated attachment resulted in PowerShell execution, network communication, creation of a secondary executable, and subsequent execution of that file.
+
+The employee reported that the attachment was not opened. No evidence indicates that the simulated malicious behavior occurred on the employee endpoint, and no endpoint or credential compromise was observed.
+
+The incident was classified as a malicious phishing and malware-delivery attempt with no observed impact to the original recipient.
+
+EMAIL ANALYSIS
+
+Sender:
+payroll@company-payroll.example
+
+Reply-To:
+payroll-documents@employee-services.example
+
+Subject:
+CONFIDENTIAL: 2026 Employee Salary Adjustment
+
+Source IP:
+198.51.100.84
+
+Attachment:
+Employee_Salary_Adjustments_2026.pdf.exe
+
+Authentication Results:
+SPF: Fail
+DKIM: None
+DMARC: Fail
+
+The sender and Reply-To addresses used different domains. SPF and DMARC failed, while no DKIM signature was available for validation. These authentication results increased suspicion but were not treated as independent proof that the message was malicious.
+
+The message used payroll-related social engineering and instructed the recipient to review the attachment before the end of the day, creating urgency.
+
+The attachment used a deceptive .pdf.exe double extension. The final .exe extension presented the attachment as a Windows executable rather than a PDF.
+
+
+STATIC FILE ANALYSIS
+
+A harmless text artifact was used to practice static-analysis procedures without creating or executing malware.
+
+SHA-256 hashing was performed against the training artifact. After the file contents were modified, the SHA-256 value changed, demonstrating that hashes can be used to distinguish exact file contents.
+
+File-signature analysis using Format-Hex showed the training artifact beginning with:
+
+43 41 53 45
+
+The bytes represented "CASE" in ASCII and were consistent with the contents of the text artifact.
+
+The commonly associated Windows PE signature "MZ" was studied for comparison but was not observed in the training artifact.
+
+Readable-content analysis demonstrated how strings may reveal investigative leads such as URLs, domains, commands, filenames, and paths. Strings alone were not treated as evidence that referenced behavior actually occurred.
+
+SIMULATED DYNAMIC ANALYSIS
+
+A simulated sandbox report was used to evaluate the behavior of the simulated malicious attachment without executing real malware.
+
+When Employee_Salary_Adjustments_2026.pdf.exe was executed in the simulated sandbox, the following behavior was observed:
+
+1. Employee_Salary_Adjustments_2026.pdf.exe launched powershell.exe.
+
+2. powershell.exe initiated network communication with:
+   update-payroll.example
+
+3. A secondary executable was created at:
+   C:\Users\Public\payroll-update.exe
+
+4. payroll-update.exe was subsequently executed.
+
+The correlated execution chain supported classifying the simulated attachment as malicious within the lab scenario.
+
+The sandbox results demonstrate behavior observed in the simulated sandbox environment only. They do not establish that the attachment was executed or that these behaviors occurred on the employee endpoint.
+
+
+MITRE ATT&CK MAPPING
+
+T1566.001 - Phishing: Spearphishing Attachment
+Tactic: Initial Access
+Status: Observed
+
+The malicious attachment was delivered to the recipient through the simulated phishing email.
+
+
+T1204.002 - User Execution: Malicious File
+Tactic: Execution
+Status: Intended / Not Observed on Employee Endpoint
+
+The email attempted to persuade the employee to open the malicious attachment. The employee reported that the attachment was not opened.
+
+
+T1059.001 - Command and Scripting Interpreter: PowerShell
+Tactic: Execution
+Status: Observed in Simulated Sandbox Only
+
+PowerShell execution was observed during simulated sandbox execution but was not observed on the employee endpoint.
+
+
+T1105 - Ingress Tool Transfer
+Tactic: Command and Control
+Status: Potentially Supported / Requires Additional Evidence
+
+The sandbox showed PowerShell communicating with update-payroll.example followed by creation of payroll-update.exe. The available evidence did not directly establish that the secondary executable was transferred from that remote system, so the technique was not treated as definitively observed.
+
+CONTAINMENT AND REMEDIATION
+
+Because the original employee reported that the attachment was not opened and no endpoint compromise was observed, endpoint isolation was not recommended based on the available evidence.
+
+Recommended response actions:
+
+1. Quarantine or remove the malicious phishing email from the recipient's mailbox.
+
+2. Search the email environment for additional messages associated with the campaign using available indicators such as:
+   - Sender address
+   - Reply-To address
+   - Email subject
+   - Attachment filename
+   - Source IP
+
+3. Quarantine or remove matching malicious messages identified in other employee mailboxes.
+
+4. Identify additional recipients and determine whether any users opened or executed the attachment.
+
+5. Block identified malicious campaign indicators through appropriate organizational security controls where supported.
+
+6. Preserve the original phishing email and relevant investigation evidence.
+
+7. Review endpoint, network, authentication, and email telemetry if evidence indicates that another recipient interacted with the attachment.
+
+8. Escalate endpoint and account containment if subsequent evidence identifies malicious execution, credential compromise, unauthorized account activity, or other indicators of compromise.
+
+
+RESPONSE RATIONALE
+
+Containment actions were based on observed evidence rather than the potential capabilities of the attachment alone.
+
+The original recipient reported no interaction with the attachment, and no evidence established execution or compromise on the employee endpoint. Therefore, isolating the endpoint or resetting the employee's credentials was not recommended solely because the malicious email was received.
+
+If evidence later establishes execution of the attachment, the response should be escalated. An affected endpoint may require network isolation and investigation for malicious process execution, file creation, network communication, persistence, and other indicators of compromise.
+
+Account containment, including credential reset or active-session revocation, should be considered when supported by the incident scope, observed compromise, or organizational incident-response procedures.
+
+FINAL ASSESSMENT
+
+The investigation determined that the email and simulated attachment represented a malicious phishing and malware-delivery attempt.
+
+The email used payroll-themed social engineering, suspicious sender characteristics, failed email-authentication checks, and a deceptive executable attachment to encourage user interaction.
+
+Simulated sandbox analysis demonstrated malicious behavior when the attachment was executed. However, the original employee reported that the attachment was not opened, and no evidence established malicious execution, endpoint compromise, or credential compromise on the employee's system.
+
+Final Disposition:
+Malicious - Phishing / Malware Delivery Attempt
+
+Severity:
+Low
+
+Impact:
+No observed impact to the original recipient.
+
+Case Status:
+Contained / No Observed Endpoint Compromise
+
+
+LAB LIMITATIONS
+
+This investigation was conducted as a controlled cybersecurity training exercise.
+
+The suspicious executable attachment and its sandbox behavior were simulated. A harmless text artifact was used for hands-on hashing, file-signature, and readable-content analysis.
+
+The domains and IP addresses used in this scenario are reserved or simulated training values and should not be interpreted as real malicious infrastructure.
+
+No real malware was downloaded, created, or executed during this lab.
